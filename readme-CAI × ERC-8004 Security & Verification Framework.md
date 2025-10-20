@@ -201,7 +201,7 @@ npm run dev
 
 **Duration**: 2 minutes 50 seconds | **Language**: Chinese with subtitles
 
-📹 **Watch Demo**: [https://youtu.be/nhD_7KJaWXk](https://youtu.be/nhD_7KJaWXk))
+📹 **Watch Demo**: [https://youtu.be/nhD_7KJaWXk](https://youtu.be/nhD_7KJaWXk)
 
 ### What's Demonstrated
 
