@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAI × ERC-8004 Framework - Visual Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.5s ease-out;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .verification-step {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .verification-step::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 30px;
+            bottom: -30px;
+            width: 2px;
+            background: linear-gradient(to bottom, #10b981, transparent);
+        }
+        
+        .verification-step:last-child::before {
+            display: none;
+        }
+        
+        .stat-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: rgba(59, 130, 246, 0.3);
+            border-bottom: 2px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen text-white">
+    <!-- Navigation -->
+    <nav class="glass-effect sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center animate-glow">
+                        <i data-lucide="shield" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">CAI Framework</h1>
+                        <p class="text-xs text-gray-300">Verifiable AI-Agent Commerce</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="showSection('dashboard')" class="nav-btn active px-4 py-2 rounded-lg hover:bg-white/10 transition">
+                        Dashboard
+                    </button>
+                    <button onclick="showSection('demo')" class="nav-btn px-4 py-2 rounded-lg hover:bg-white/10 transition">
+                        Demo
+                    </button>
+                    <button onclick="showSection('audit')" class="nav-btn px-4 py-2 rounded-lg hover:bg-white/10 transition">
+                        Audit
+                    </button>
+                    <button class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition">
+                        Connect Wallet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="section max-w-7xl mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <div class="text-center mb-12 animate-fadeInUp">
+            <h2 class="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                AI Agent Commerce Security Framework
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                End-to-End Verifiable Payment Protocol Based on ERC-8004
+            </p>
+            <div class="flex justify-center space-x-4 flex-wrap gap-2">
+                <div class="glass-effect px-6 py-3 rounded-full">
+                    <span class="text-green-400">●</span> Deployed on Sepolia Testnet
+                </div>
+                <div class="glass-effect px-6 py-3 rounded-full">
+                    <i data-lucide="check-circle" class="w-4 h-4 inline text-green-400"></i>
+                    93.7% Test Coverage
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="stat-card glass-effect rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.1s">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-blue-400"></i>
+                    </div>
+                    <span class="text-green-400 text-sm">↑ 12%</span>
+                </div>
+                <h3 class="text-gray-400 text-sm mb-2">Registered DIDs</h3>
+                <p class="text-3xl font-bold" id="totalDIDs">127</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.2s">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                        <i data-lucide="file-check" class="w-6 h-6 text-purple-400"></i>
+                    </div>
+                    <span class="text-green-400 text-sm">↑ 8%</span>
+                </div>
+                <h3 class="text-gray-400 text-sm mb-2">Issued Credentials</h3>
+                <p class="text-3xl font-bold" id="totalCredentials">342</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.3s">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                        <i data-lucide="anchor" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                </div>
+                <h3 class="text-gray-400 text-sm mb-2">AHIN Blocks</h3>
+                <p class="text-3xl font-bold" id="ahinBlocks">45</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 animate-fadeInUp" style="animation-delay: 0.4s">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                        <i data-lucide="activity" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                    <span class="text-green-400 text-sm">↑ 15%</span>
+                </div>
+                <h3 class="text-gray-400 text-sm mb-2">Total Transactions</h3>
+                <p class="text-3xl font-bold" id="totalTxs">1,847</p>
+            </div>
+        </div>
+
+        <!-- Charts and Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Activity Chart -->
+            <div class="lg:col-span-2 glass-effect rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-6">Transaction Activity Trends</h3>
+                <div class="h-64" id="activityChart">
+                    <canvas id="chartCanvas"></canvas>
+                </div>
+            </div>
+
+            <!-- ChainRank Card -->
+            <div class="glass-effect rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-6">Agent Reputation Score</h3>
+                <div class="text-center mb-6">
+                    <div class="relative inline-flex items-center justify-center">
+                        <svg class="w-32 h-32 transform -rotate-90">
+                            <circle cx="64" cy="64" r="52" stroke="currentColor" stroke-width="8" fill="none" class="text-gray-700"></circle>
+                            <circle cx="64" cy="64" r="52" stroke="currentColor" stroke-width="8" fill="none" class="text-blue-500" stroke-dasharray="326.73" stroke-dashoffset="32.67" stroke-linecap="round"></circle>
+                        </svg>
+                        <div class="absolute text-center">
+                            <div class="text-4xl font-bold text-blue-400">95</div>
+                            <div class="text-sm text-gray-400">/ 100</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Agent:</span>
+                        <span class="font-mono text-xs">0x1234...7890</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Total Txs:</span>
+                        <span class="font-semibold">847</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Success Rate:</span>
+                        <span class="text-green-400 font-semibold">98%</span>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="glass-effect rounded-xl p-6 mt-6">
+            <h3 class="text-xl font-semibold mb-6">Recent Activity</h3>
+            <div class="space-y-4" id="recentActivity">
+                <!-- Activity items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Demo Section -->
+    <div id="demo" class="section hidden max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-4xl font-bold mb-8 text-center">Complete Transaction Flow Demo</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left: Flow Steps -->
+            <div class="space-y-6">
+                <div class="verification-step">
+                    <div class="glass-effect rounded-xl p-6 cursor-pointer hover:bg-white/20 transition" onclick="executeStep(1)">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                1
+                            </div>
+                            <h4 class="text-lg font-semibold">User Issues Mandate VC</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 ml-12">
+                            Budget: 100 DAI | Validity: 24h | Authorize Agent
+                        </p>
+                    </div>
+                </div>
+
+                <div class="verification-step">
+                    <div class="glass-effect rounded-xl p-6 cursor-pointer hover:bg-white/20 transition" onclick="executeStep(2)">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                2
+                            </div>
+                            <h4 class="text-lg font-semibold">Agent Creates Shopping Cart</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 ml-12">
+                            Item 1: AI Training Data 50 DAI | Item 2: GPU Compute 45 DAI
+                        </p>
+                    </div>
+                </div>
+
+                <div class="verification-step">
+                    <div class="glass-effect rounded-xl p-6 cursor-pointer hover:bg-white/20 transition" onclick="executeStep(3)">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                3
+                            </div>
+                            <h4 class="text-lg font-semibold">On-Chain Transaction Init</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 ml-12">
+                            Verify DID → Verify VC → Generate Transaction ID
+                        </p>
+                    </div>
+                </div>
+
+                <div class="verification-step">
+                    <div class="glass-effect rounded-xl p-6 cursor-pointer hover:bg-white/20 transition" onclick="executeStep(4)">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                4
+                            </div>
+                            <h4 class="text-lg font-semibold">Payment Completed</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 ml-12">
+                            Gateway Returns Signed Receipt → Update Status
+                        </p>
+                    </div>
+                </div>
+
+                <div class="verification-step">
+                    <div class="glass-effect rounded-xl p-6 cursor-pointer hover:bg-white/20 transition" onclick="executeStep(5)">
+                        <div class="flex items-center space-x-4 mb-3">
+                            <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-sm font-bold">
+                                5
+                            </div>
+                            <h4 class="text-lg font-semibold">AHIN Anchoring</h4>
+                        </div>
+                        <p class="text-sm text-gray-300 ml-12">
+                            Batch Generate Merkle Root → Submit to Ethereum
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Visualization -->
+            <div class="glass-effect rounded-xl p-8">
+                <h3 class="text-xl font-semibold mb-6 text-center">Real-time Visualization</h3>
+                <div id="flowVisualization" class="space-y-6">
+                    <div class="text-center text-gray-400 py-20">
+                        Click steps on the left to view animation demo
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audit Section -->
+    <div id="audit" class="section hidden max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-4xl font-bold mb-8 text-center">Transaction Audit Query</h2>
+        
+        <!-- Search Bar -->
+        <div class="glass-effect rounded-xl p-6 mb-8">
+            <label class="block text-sm font-medium mb-3">Transaction ID</label>
+            <div class="flex space-x-4">
+                <input 
+                    type="text" 
+                    id="txIdInput"
+                    placeholder="0x..." 
+                    class="flex-1 bg-white/10 border border-white/20 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button 
+                    onclick="searchTransaction()"
+                    class="px-8 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition flex items-center space-x-2"
+                >
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                    <span>Search</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Result -->
+        <div id="auditResult" class="hidden">
+            <!-- Verification Chain -->
+            <div class="glass-effect rounded-xl p-6 mb-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold">Verification Chain</h3>
+                    <button class="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition flex items-center space-x-2">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download Report</span>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="border-l-4 border-green-500 pl-6 py-3">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <h4 class="font-semibold">1. Mandate VC</h4>
+                        </div>
+                        <p class="text-sm text-gray-300">User authorization verified ✓</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Signature: 0xabcd...ef12</p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-6 py-3">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <h4 class="font-semibold">2. Cart VC</h4>
+                        </div>
+                        <p class="text-sm text-gray-300">Shopping cart hash matched ✓</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Hash: 0x7f3e...8e9f</p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-6 py-3">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <h4 class="font-semibold">3. Payment</h4>
+                        </div>
+                        <p class="text-sm text-gray-300">Transaction completed ✓</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Amount: 95000000000000000000 wei</p>
+                    </div>
+
+                    <div class="border-l-4 border-green-500 pl-6 py-3">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <h4 class="font-semibold">4. Receipt</h4>
+                        </div>
+                        <p class="text-sm text-gray-300">Vendor signed receipt ✓</p>
+                        <p class="text-xs text-gray-400 font-mono mt-1">Hash: 0x9a2b...cd3e</p>
+                    </div>
+
+                    <div class="border-l-4 border-blue-500 pl-6 py-3">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i data-lucide="clock" class="w-5 h-5 text-blue-400"></i>
+                            <h4 class="font-semibold">5. AHIN Anchor</h4>
+                        </div>
+                        <p class="text-sm text-gray-300">Awaiting batch anchoring</p>
+                        <p class="text-xs text-gray-400 mt-1">Will be anchored in the next batch</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Details -->
+            <div class="glass-effect rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-6">Transaction Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-sm text-gray-400 mb-2">Agent Address</p>
+                        <p class="text-sm font-mono bg-white/10 p-3 rounded">0x1234...7890</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 mb-2">Merchant Address</p>
+                        <p class="text-sm font-mono bg-white/10 p-3 rounded">0xabcd...efgh</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 mb-2">Amount</p>
+                        <p class="text-sm font-mono bg-white/10 p-3 rounded">95 DAI</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-400 mb-2">Timestamp</p>
+                        <p class="text-sm bg-white/10 p-3 rounded">2025-10-19 14:32:15</p>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p class="text-sm text-gray-400 mb-2">Cart Hash</p>
+                        <p class="text-sm font-mono bg-white/10 p-3 rounded break-all">0x7f3e8b9a2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            if (sectionId === 'dashboard') {
+                initDashboard();
+            }
+        }
+
+        function initDashboard() {
+            animateCounter('totalDIDs', 127, 2000);
+            animateCounter('totalCredentials', 342, 2000);
+            animateCounter('ahinBlocks', 45, 2000);
+            animateCounter('totalTxs', 1847, 2000);
+            drawActivityChart();
+            loadRecentActivity();
+        }
+
+        function animateCounter(id, target, duration) {
+            const element = document.getElementById(id);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        function drawActivityChart() {
+            const canvas = document.getElementById('chartCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 256;
+
+            const data = [12, 19, 15, 25, 22, 18, 20];
+            const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            const max = Math.max(...data);
+            const barWidth = canvas.width / data.length - 20;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            data.forEach((value, index) => {
+                const height = (value / max) * (canvas.height - 40);
+                const x = index * (barWidth + 20) + 10;
+                const y = canvas.height - height - 20;
+
+                const gradient = ctx.createLinearGradient(0, y, 0, canvas.height);
+                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)');
+                gradient.addColorStop(1, 'rgba(147, 51, 234, 0.8)');
+                
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, y, barWidth, height);
+
+                ctx.fillStyle = '#9CA3AF';
+                ctx.font = '12px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[index], x + barWidth / 2, canvas.height - 5);
+
+                ctx.fillStyle = '#fff';
+                ctx.fillText(value, x + barWidth / 2, y - 5);
+            });
+        }
+
+        function loadRecentActivity() {
+            const container = document.getElementById('recentActivity');
+            const activities = [
+                { type: 'Transaction Complete', id: '0x1a2b3c4d', amount: '10 DAI', time: '1 min ago' },
+                { type: 'VC Issued', id: '0x5e6f7g8h', amount: '—', time: '3 mins ago' },
+                { type: 'DID Registered', id: '0x9i0j1k2l', amount: '—', time: '5 mins ago' },
+                { type: 'Transaction Complete', id: '0x3m4n5o6p', amount: '25 DAI', time: '8 mins ago' },
+                { type: 'Transaction Complete', id: '0x7q8r9s0t', amount: '15 DAI', time: '12 mins ago' }
+            ];
+
+            container.innerHTML = activities.map(activity => `
+                <div class="flex items-center justify-between p-4 hover:bg-white/5 rounded-lg transition">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                            <i data-lucide="activity" class="w-5 h-5 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium">${activity.type}</p>
+                            <p class="text-sm text-gray-400 font-mono">${activity.id}...</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold">${activity.amount}</p>
+                        <p class="text-sm text-gray-400">${activity.time}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function executeStep(step) {
+            const visualization = document.getElementById('flowVisualization');
+            
+            const stepContent = {
+                1: `
+                    <div class="animate-fadeInUp">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-blue-500 rounded-full mx-auto flex items-center justify-center mb-4 animate-pulse-slow">
+                                <i data-lucide="file-signature" class="w-10 h-10"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">User Issues Mandate VC</h4>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-6 space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Authorized Agent:</span>
+                                <span class="font-mono text-sm">0xabcd...efgh</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Budget Limit:</span>
+                                <span class="text-green-400 font-semibold">100 DAI</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Validity:</span>
+                                <span>24 hours</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Whitelist:</span>
+                                <span class="text-xs">merchant1.eth, merchant2.eth</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center space-x-2 text-green-400">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                <span>VC Signed Successfully</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2 font-mono">Hash: 0x7f3e8b9a2c1d...</p>
+                        </div>
+                    </div>
+                `,
+                2: `
+                    <div class="animate-fadeInUp">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-purple-500 rounded-full mx-auto flex items-center justify-center mb-4 animate-pulse-slow">
+                                <i data-lucide="shopping-cart" class="w-10 h-10"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Agent Creates Shopping Cart</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold">AI Training Dataset</span>
+                                    <span class="text-green-400">50 DAI</span>
+                                </div>
+                                <p class="text-xs text-gray-400">10GB high-quality labeled data</p>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold">GPU Compute Hours</span>
+                                    <span class="text-green-400">45 DAI</span>
+                                </div>
+                                <p class="text-xs text-gray-400">10 hours A100 GPU</p>
+                            </div>
+                            <div class="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold">Total:</span>
+                                    <span class="text-2xl font-bold text-green-400">95 DAI</span>
+                                </div>
+                                <p class="text-xs text-gray-400 mt-1">✓ Within budget (100 DAI)</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center space-x-2 text-green-400">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                <span>Cart VC Generated</span>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-2 font-mono">Cart Hash: 0x9a8b7c6d...</p>
+                        </div>
+                    </div>
+                `,
+                3: `
+                    <div class="animate-fadeInUp">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-green-500 rounded-full mx-auto flex items-center justify-center mb-4 animate-pulse-slow">
+                                <i data-lucide="zap" class="w-10 h-10"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">On-Chain Transaction Initialization</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Verify Agent DID</p>
+                                    <p class="text-xs text-gray-400">DID registered and active</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Verify Mandate VC</p>
+                                    <p class="text-xs text-gray-400">Signature valid, not expired</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Verify Budget</p>
+                                    <p class="text-xs text-gray-400">95 DAI ≤ 100 DAI ✓</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 animate-pulse">
+                                    <i data-lucide="loader" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Generate Transaction ID</p>
+                                    <p class="text-xs text-gray-400">Creating on-chain record...</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
+                            <p class="text-sm mb-2">Transaction ID:</p>
+                            <p class="font-mono text-xs break-all">0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b</p>
+                            <a href="#" class="text-xs text-blue-400 hover:underline mt-2 inline-block">View on Etherscan →</a>
+                        </div>
+                    </div>
+                `,
+                4: `
+                    <div class="animate-fadeInUp">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-yellow-500 rounded-full mx-auto flex items-center justify-center mb-4 animate-pulse-slow">
+                                <i data-lucide="credit-card" class="w-10 h-10"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Payment Completed</h4>
+                        </div>
+                        <div class="bg-white/10 rounded-lg p-6 mb-4">
+                            <h5 class="font-semibold mb-3">Payment Gateway Processing</h5>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span class="text-sm">Connecting to gateway...</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span class="text-sm">Verifying Cart Hash match...</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                    <span class="text-sm">Executing payment 95 DAI...</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                    <span class="text-sm">Generating signed receipt...</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-green-500/20 rounded-lg p-4 border border-green-500/50">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i data-lucide="check-circle" class="w-6 h-6 text-green-400"></i>
+                                <span class="font-bold text-green-400">Payment Successful</span>
+                            </div>
+                            <div class="space-y-1 text-sm">
+                                <p class="flex justify-between">
+                                    <span class="text-gray-400">Receipt Hash:</span>
+                                    <span class="font-mono text-xs">0xfedcba09...</span>
+                                </p>
+                                <p class="flex justify-between">
+                                    <span class="text-gray-400">Time:</span>
+                                    <span>2025-10-19 14:32:15</span>
+                                </p>
+                                <p class="flex justify-between">
+                                    <span class="text-gray-400">Gas Fee:</span>
+                                    <span>0.002 ETH</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                5: `
+                    <div class="animate-fadeInUp">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-red-500 rounded-full mx-auto flex items-center justify-center mb-4 animate-pulse-slow">
+                                <i data-lucide="anchor" class="w-10 h-10"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">AHIN Anchoring</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <h5 class="font-semibold mb-3">Merkle Tree Construction</h5>
+                                <div class="font-mono text-xs text-center">
+                                    <div class="mb-2">Root: 0x9f8b...</div>
+                                    <div class="text-gray-400 mb-2">/ \\</div>
+                                    <div class="mb-2">H12 &nbsp;&nbsp;&nbsp; H34</div>
+                                    <div class="text-gray-400 mb-2">/ \\ &nbsp;&nbsp; / \\</div>
+                                    <div>H1 H2 H3 H4</div>
+                                </div>
+                                <div class="mt-3 text-center text-sm text-gray-400">
+                                    Current batch: 23 transactions
+                                </div>
+                            </div>
+                            <div class="bg-blue-500/20 rounded-lg p-4 border border-blue-500/50">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="font-semibold">Anchoring Progress</span>
+                                    <span class="text-sm text-gray-400">Awaiting next batch</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
+                                    <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full" style="width: 23%"></div>
+                                </div>
+                                <div class="flex justify-between text-xs text-gray-400">
+                                    <span>23 / 100 transactions</span>
+                                    <span>Next anchor: ~3 mins</span>
+                                </div>
+                            </div>
+                            <div class="text-center text-sm text-gray-400">
+                                <p>Will submit to Sepolia testnet after anchoring</p>
+                                <p class="text-xs mt-1">Estimated gas fee: 0.0015 ETH</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+
+            visualization.innerHTML = stepContent[step];
+            lucide.createIcons();
+        }
+
+        function searchTransaction() {
+            const txId = document.getElementById('txIdInput').value;
+            
+            if (!txId || !txId.startsWith('0x')) {
+                alert('Please enter a valid Transaction ID (starting with 0x)');
+                return;
+            }
+
+            const result = document.getElementById('auditResult');
+            result.classList.remove('hidden');
+            result.classList.add('animate-fadeInUp');
+            
+            setTimeout(() => {
+                result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+            
+            lucide.createIcons();
+        }
+
+        window.addEventListener('load', () => {
+            initDashboard();
+            
+            setInterval(() => {
+                const didElement = document.getElementById('totalDIDs');
+                const currentValue = parseInt(didElement.textContent);
+                didElement.textContent = currentValue + Math.floor(Math.random() * 3);
+
+                const txElement = document.getElementById('totalTxs');
+                const currentTx = parseInt(txElement.textContent.replace(',', ''));
+                txElement.textContent = (currentTx + Math.floor(Math.random() * 5)).toLocaleString();
+            }, 5000);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '1' && e.ctrlKey) {
+                e.preventDefault();
+                showSection('dashboard');
+            } else if (e.key === '2' && e.ctrlKey) {
+                e.preventDefault();
+                showSection('demo');
+            } else if (e.key === '3' && e.ctrlKey) {
+                e.preventDefault();
+                showSection('audit');
+            }
+        });
+    </script>
+</body>
+</html>
